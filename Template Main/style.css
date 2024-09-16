@@ -207,6 +207,7 @@
 	-moz-transition: all 0.4s ease;
 	transition: all 0.4s ease;
 }
+
 .header .navbar {
 	padding: 0;
 }
@@ -598,8 +599,11 @@
 	background-color: #2c362aea !important;
 }
 .nav-item , .nav-link{
-	color: #ffffff !important;
+	color: #ffffff ;
 	font-weight: 500 !important;
+}
+.nav-link:hover,.nav-link:active{
+	color: #ffffff !important;
 }
 .nav-item-active{
 	background-color: #228B22 !important;
@@ -1220,22 +1224,26 @@
 	overflow: hidden;
 }
 .hero-slider .single-slider {
-	height: auto;
-	background-image: url(images/person-shoe-white-leg-sneaker-spring-179708-pxhere.com.jpg);
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
+    height: auto;
+    background-image: 
+        linear-gradient(to bottom, rgba(255, 255, 255, 0) 10%, rgba(0, 0, 0, 0.493)),
+        url(images/person-shoe-white-leg-sneaker-spring-179708-pxhere.com.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     height: 510px;
 }
+
 .hero-slider .text-inner {
 	
 }
 .hero-slider .hero-text {
-	padding: 0 30px;
+
 	margin-top:100px;
-	background-color: #228b229c;
-	padding: 5px;
-	border-radius: 5px;
+	
+	padding: 50px;
+	border-radius: 20px;
+	backdrop-filter: blur(5px);
 }
 .hero-slider .hero-text h1 {
 	line-height: 50px;
@@ -1277,6 +1285,7 @@
 	border-radius: 5px ;
 	height: auto;
 	z-index: 0;
+	font-weight: bolder;
 }
 
 .hero-slider .hero-text .btn:hover{
@@ -1553,56 +1562,68 @@
    Start Small Banner CSS
 ========================================*/ 
 .small-banner{
-	padding:30px 0;
-	padding-bottom:0;
+	background: linear-gradient(to top,rgba(255, 255, 255, 0)70%, rgba(255, 255, 255, 0)  );
+	position: relative;
+	bottom: 45px;
 }
 .small-banner .single-banner {
 	overflow:hidden;
 	position:relative;
+	filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.377));
+	border-radius:10px ;
+	transition: transform 0.2s ease-in-out;
+}
+.small-banner .single-banner:hover {
+	transform: scale(1.02);
 }
 .small-banner .single-banner img{
 	height:100%;
 	width:100%;
-	-webkit-transition:all 0.4s ease;
 	-moz-transition:all 0.4s ease;
 	transition:all 0.4s ease;
+	filter:grayscale(50%);
+	filter: brightness(60%);
 }
 .small-banner .single-banner .content {
 	position: absolute;
 	left: 0;
 	top: 50%;
+
+
 	transform: translateY(-50%);
 	padding-left: 35px;
+	background-color: radial;
 }
 .small-banner .single-banner h3 {
-	font-size: 22px;
-	font-weight: 700;
+	font-size: 23px;
+	font-weight: bolder;
 	text-transform: capitalize;
-	color: #333;
+	color: #ffffff;
 }
 .small-banner .single-banner h3 span{
-	color:#228B22;
+	color:#657556;
 }
 .small-banner .single-banner p {
-	font-size: 14px;
-	color: #228B22;
-	font-weight: 500;
+	font-size: 20px;
+	color: #b0fd9c;
+	font-weight: bolder;
 	margin-bottom: 5px;
 	text-transform: capitalize;
 }
 .small-banner .single-banner a {
-	color: #333;
+	color: #ffffff;
 	margin-top: 22px;
 	display: block;
-	font-size: 12px;
-	font-weight:500;
+	font-size: 16px;
+	font-weight:bolder;
 	display: inline-block;
 	text-transform:uppercase;
-	border-bottom:2px solid #333;
+	border-bottom:2px solid #5bf800;
 }
 .small-banner .single-banner a:hover{
-	color:#228B22;
-	border-color:#228B22;
+	color:#ffffff;
+	border-color:#000000;
+	transform: scale(1.1);
 }
 /*======================================
    End Small Banner CSS
@@ -1776,6 +1797,7 @@
   position: relative;
   overflow: hidden;
   cursor:pointer;
+  border-radius: 10px;
 }
 .single-product .product-img a {
   display: block;
@@ -2604,7 +2626,7 @@
 	border: 0px solid;
 	border-radius: 0px;
 	background: #fff;
-	color: #333;
+	color: #333 !important;
 	padding: 10px 30px;
 	font-weight: 500;
 	font-size: 14px;
@@ -2840,7 +2862,7 @@
 	content: "";
 	height: 2px;
 	width: 50px;
-	background: #228B22;
+	background: #bb0000;
 	left: 0;
 	bottom: -1px;
 }
@@ -5166,6 +5188,8 @@ max-width: 100% !important;
   #menu-toggle:checked ~ .menu {
 	transform: scale(1, 1);
   }
+
+  
   
   @media only screen and (max-width: 950px) {
 	.menu {
