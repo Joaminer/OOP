@@ -1672,6 +1672,13 @@
 	font-size: 13px;
 	font-weight: 400;
 }
+.logo2 img 
+{
+    width:50% ;
+	height:70%;
+	margin-left:50px;
+	
+};
 .quickview-content h3 {
 	font-size: 15px;
 	margin: 10px 0 10px;

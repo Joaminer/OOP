@@ -196,6 +196,17 @@ img,a,input,h1, h2, h3, h4, h5, h6{
 dfn, cite, em, i {
 	font-style: italic;
 }
+
+.logo2 img {
+    width: 250px;   
+    height: 100px;  
+	position: relative;   
+    margin-left: 20px;
+    margin-top: 7px;
+    margin-bottom: 13px;
+}
+
+
 address {
 	margin: 0 0 1.5em;
 }
