@@ -8,7 +8,7 @@ const getCarrito = async (req, res) => {
 
   try {
     const carrito = await carritoModel.getCarritoByUserId(userId);
-    res.status(200).json({ carrito });
+    res.sendFile('cart.html').json({ carrito });
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener el carrito' });
   }
