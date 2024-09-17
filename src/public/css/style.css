@@ -722,10 +722,11 @@
 .nav-link:hover,
 .nav-link:active {
 	color: #ffffff !important;
+	background-color: #228B22 !important;
 }
 
 .nav-item-active {
-	background-color: #228B22 !important;
+	background-color: #279927 !important;
 }
 
 .nav-item {
