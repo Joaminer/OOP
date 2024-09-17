@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const app = express();
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 const promotionRoutes = require('./routes/promotionRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
@@ -14,8 +15,11 @@ const carritoRoutes = require("./routes/carritoRoutes")
 const direccionRoutes = require("./routes/direccionRoutes")
 const orderRoutes = require('./routes/pedidoRoutes');
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs')
+
 app.use(morgan('dev'));
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({
   origin: FRONTEND_URL,
   credentials: true
@@ -25,18 +29,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Usar las rutas de promociones
-app.use('/api/promotions', promotionRoutes);
+app.use('/promotions', promotionRoutes);
 
-app.use('/api/auth', userRoutes);
+app.use('/auth', userRoutes);
 
 // Rutas de productos
-app.use('/api/productos', productRoutes);
-app.use("/api/categories", categoryRoutes)
-app.use('/api/carrito', carritoRoutes);
-app.use('/api/direccion', direccionRoutes);
+app.use('/productos', productRoutes);
+app.use("/categories", categoryRoutes)
+app.use('/carrito', carritoRoutes);
+app.use('/direccion', direccionRoutes);
 
 // Rutas protegidas por autenticación
-app.use('/api/pedidos', orderRoutes);
+app.use('/pedidos', orderRoutes);
 
 const port = PORT || 9000;
 

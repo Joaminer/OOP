@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" href="/css/magnific-popup.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/css/font-awesome.css">
+  <!-- Fancybox -->
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+  <!-- Themify Icons -->
+  <link rel="stylesheet" href="/css/themify-icons.css">
+  <!-- Nice Select CSS -->
+  <link rel="stylesheet" href="/css/niceselect.css">
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="/css/animate.css">
+  <!-- Flex Slider CSS -->
+  <link rel="stylesheet" href="/css/flex-slider.min.css">
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="/css/owl-carousel.css">
+  <!-- Slicknav -->
+  <link rel="stylesheet" href="/css/slicknav.min.css">
+  <link rel="stylesheet" href="/css/styleSesion.css">
+</head>
+
+<body>
+  <div class="top"><a href="/">
+      <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+      <svg width="40px" height="40px" viewBox="0 0 1024 1024" fill="#000000" class="icon" version="1.1"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M669.6 849.6c8.8 8 22.4 7.2 30.4-1.6s7.2-22.4-1.6-30.4l-309.6-280c-8-7.2-8-17.6 0-24.8l309.6-270.4c8.8-8 9.6-21.6 2.4-30.4-8-8.8-21.6-9.6-30.4-2.4L360.8 480.8c-27.2 24-28 64-0.8 88.8l309.6 280z"
+          fill="" />
+      </svg> </a></div>
+
+  <div class="container" id="container">
+    <div class="form-container sign-up-container" style="overflow-x: scroll;">
+      <form action="/auth/register" method="post">
+        <h1 style="padding-top: 15px;">Crea una cuenta</h1>
+        <input type="text" placeholder="Nombre" name="nombre" />
+        <input type="text" placeholder="Apellido" name="apellido" />
+        <input type="email" placeholder="Correo" name="email" />
+        <input type="tel" placeholder="Teléfono" name="telefono" />
+        <input type="password" placeholder="Contraseña" name="contrasena" />
+        <button>Registrarse</button>
+      </form>
+    </div>
+    <div class="form-container sign-in-container">
+      <form action="/auth/login" method="post">
+        <h1>Ingresar</h1>
+        <input type="email" placeholder="Correo" name="email" />
+        <input type="password" placeholder="Contraseña" name="contrasena" />
+        <a href="#">Olvidaste la contraseña?</a>
+        <% if (locals.error) { %>
+
+          <p><%= error %></p>
+         
+         <% } %>
+        <button>Ingresar</button>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>Bienvenido de nuevo!</h1>
+          <p>Para mantenerte conectado con nosotros ingresa la informacion solicitada</p>
+          <button class="ghost" id="signIn">Ingresa</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Comienza ahora!</h1>
+          <p>Ingresa y comienza a disfrutar de los beneficios</p>
+          <button class="ghost" id="signUp">Registrarse</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <% if (locals.message) { %>
+
+      <h1><%= message %></h1>
+     
+     <% } %>
+
+
+  <script src="/js/sesion.js"></script>
+</body>
+
+</html>

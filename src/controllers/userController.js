@@ -5,6 +5,10 @@ const { generateToken, verifyToken } = require('../utils/authUtils');
 const sendEmail = require('../utils/emailUtils');
 const {BACKEND_URL} = require('../config/config');
 
+const getUserRegistrationForm = (req, res) => {
+  res.render('Sesion');
+}
+
 const registerUser = async (req, res) => {
   const { nombre, apellido, email, contrasena, telefono } = req.body;
 
@@ -13,7 +17,7 @@ const registerUser = async (req, res) => {
     // Verificar si el usuario ya existe
     const existingUser = await userModel.getUserByEmail(email);
     if (existingUser) {
-      return res.status(400).json({ error: 'El usuario ya existe.' });
+      return res.render('Sesion', {message: 'El usuario ya existe.' });
     }
 
     // Hashear la contraseña
@@ -28,24 +32,24 @@ const registerUser = async (req, res) => {
       telefono,
       tipo,
     });
-    console.log("hola")
+
     // Crear un carrito para el nuevo usuario
     await carritoModel.createCarrito(userId);
-    console.log("hola")
 
     // Generar un token de verificación
     const verificationToken = generateToken({ id: userId, email }, '1h'); // Expira en 1 hora
 
     // Enviar correo de confirmación
-    const confirmationLink = `${BACKEND_URL}/api/auth/confirm/${verificationToken}`;
+    const confirmationLink = `${BACKEND_URL}/auth/confirm/${verificationToken}`;
     await sendEmail(email, 'Confirma tu correo electrónico', `
       <h1>Confirma tu correo electrónico</h1>
       <p>Haz clic en el enlace a continuación para confirmar tu correo:</p>
       <a href="${confirmationLink}">Confirmar correo</a>
     `);
 
-    res.status(201).json({ message: 'Registro exitoso, por favor revisa tu correo para confirmar tu cuenta.' });
+    res.render('Sesion', {message: 'Registro exitoso, por favor revisa tu correo para confirmar tu cuenta.' });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Error interno del servidor.' });
   }
 };
@@ -77,16 +81,16 @@ const loginUser = async (req, res) => {
   try {
     const user = await userModel.getUserByEmail(email);
     if (!user) {
-      return res.status(400).json({ error: 'Correo o contraseña incorrectos.' });
+      return res.render('Sesion', {error: 'Correo o contraseña incorrectos.'})
     }
 
     if (!user.habilitado) {
-      return res.status(403).json({ error: 'Tu cuenta aún no ha sido confirmada. Por favor, revisa tu correo electrónico.' });
+      return res.render('Sesion', {error: 'Tu cuenta aún no ha sido confirmada. Por favor, revisa tu correo electrónico.' });
     }
 
     const isPasswordValid = await comparePassword(contrasena, user.contrasena);
     if (!isPasswordValid) {
-      return res.status(400).json({ error: 'Correo o contraseña incorrectos.' });
+      return res.render('Sesion', { error: 'Correo o contraseña incorrectos.' });
     }
 
     const token = generateToken({ id: user.id, email: user.email });
@@ -99,11 +103,12 @@ const loginUser = async (req, res) => {
       maxAge: 3600000 // 1 hora (puedes ajustar este tiempo)
     });
 
-    res.status(200).json({ message: 'Inicio de sesión exitoso.' });
+    res.render('index', {message: 'Inicio de sesión exitoso.' });
   } catch (error) {
     res.status(500).json({ error: 'Error interno del servidor.' });
   }
 };
+
 const logoutUser = (req, res) => {
   try {
     // Eliminar la cookie que contiene el token JWT
@@ -172,6 +177,7 @@ const resetPassword = async (req, res) => {
 
 module.exports = {
   registerUser,
+  getUserRegistrationForm,
   confirmEmail,
   loginUser,
   logoutUser,

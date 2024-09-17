@@ -1,6 +1,7 @@
 const express = require('express');
 const { 
   registerUser, 
+  getUserRegistrationForm,
   confirmEmail, 
   loginUser, 
   logoutUser, 
@@ -12,6 +13,7 @@ const {
 const router = express.Router();
 
 // Registro y confirmación de usuario
+router.get('/register', getUserRegistrationForm)
 router.post('/register', registerUser);
 router.get('/confirm/:token', confirmEmail);
 
