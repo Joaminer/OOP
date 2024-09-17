@@ -68,6 +68,25 @@ const createCarrito = async (usuarioId) => {
     
     return rows[0].id;
   };
+
+
+  // Obtener los productos del carrito por el ID del carrito
+  const getProductosByCarritoId= async (carritoId) => {
+    if (!carritoId) {
+        throw new Error("El carritoId es undefined o null");
+      }
+    
+      const query = `SELECT * FROM carrito_producto WHERE carrito_id = ?`;
+      const [rows] = await db.execute(query, [carritoId]);
+      return rows;
+  }
+
+  // Vaciar el carrito del usuario
+  const vaciarCarrito = async (carritoId) => {
+    const query = 'DELETE FROM carrito_producto WHERE carrito_id = ?';
+    await db.execute(query, [carritoId]);
+  }
+
   
   module.exports = {
     createCarrito,
@@ -77,6 +96,8 @@ const createCarrito = async (usuarioId) => {
     removeProductFromCarrito,
     emptyCarrito,
     calculateTotal,
-    getCarritoIdByUserId
+    getCarritoIdByUserId,
+    getProductosByCarritoId,
+    vaciarCarrito,
   };
   

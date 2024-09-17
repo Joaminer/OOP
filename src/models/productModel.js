@@ -176,6 +176,11 @@ const getProductsByCategory = async (categoryId) => {
       throw error;
     }
   };
+  const actualizarStock = async (productoId, cantidadVendida) => {
+    const query = 'UPDATE productos SET stock = stock - ? WHERE id = ?';
+    await db.execute(query, [cantidadVendida, productoId]);
+  }
+  
 
 module.exports = {
   getAllProducts,
@@ -187,5 +192,7 @@ module.exports = {
   getProductsByPromotion,
   getProductsByPriceRange,
   getProductsWithPagination,
-  getTotalProductsCount
+  getTotalProductsCount,
+  actualizarStock
+
 };
